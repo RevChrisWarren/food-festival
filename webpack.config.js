@@ -2,7 +2,7 @@ const path = require("path");
 const webpack = require('webpack');
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
-module.exports = {
+const config = {
     entry: {
         app: './assets/js/script.js',
         events: './assets/js/events.js',
@@ -10,8 +10,9 @@ module.exports = {
         tickets: './assets/js/tickets.js'
     },
     output: {
+        path: path.join(__dirname + '/dist'),
         filename: '[name].bundle.js',
-        path: __dirname + '/dist',
+
     },
     module: {
         rules: [
@@ -25,8 +26,8 @@ module.exports = {
                             name(file) {
                                 return "[path][name].[ext]"
                             },
-                            publicPath: function (url) {
-                                return url.replace("../", "/assets/")
+                            publicPath(url) {
+                                return url.replace("../", "/assets/");
                             }
                         }
                     },
@@ -43,8 +44,10 @@ module.exports = {
             jQuery: "jquery"
         }),
         new BundleAnalyzerPlugin({
-            analyzerMode: "static", // the report outputs to an HTML file in the dist folder
+            analyzerMode: "static" // the report outputs to an HTML file in the dist folder
         })
     ],
     mode: 'development'
 };
+
+module.exports = config;
