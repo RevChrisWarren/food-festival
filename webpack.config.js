@@ -3,6 +3,11 @@ const webpack = require('webpack');
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 const config = {
+    devServer: {
+        static: {
+            directory: path.join(__dirname, '')
+        }
+    },
     entry: {
         app: './assets/js/script.js',
         events: './assets/js/events.js',
@@ -10,7 +15,7 @@ const config = {
         tickets: './assets/js/tickets.js'
     },
     output: {
-        path: path.join(__dirname + '/dist'),
+        path: path.join(__dirname + "/dist"),
         filename: '[name].bundle.js',
 
     },
